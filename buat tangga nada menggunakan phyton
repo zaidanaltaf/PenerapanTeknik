@@ -1,1 +1,15 @@
+def print_scale(scale, start_note, num_notes):
+  notes = ['C', 'D', 'E', 'F', 'G', 'A', 'B']
+  index = notes.index(start_note)
+  for i in range(num_notes):
+    print(notes[(index + i) % 7], end=" ")
+  print()
 
+# Print the C major scale
+print_scale('C major', 'C', 7)
+
+# Print the G major scale
+print_scale('G major', 'G', 7)
+
+# Print the F minor scale
+print_scale('F minor', 'F', 7)
