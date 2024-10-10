@@ -59,6 +59,11 @@ if ($kode=="D04"){
 	$harga=5000;
 }
 
+if ($kode=="E05"){
+	$nama="Kaos Kutang";
+	$harga=15000;
+}
+
 $subtotal=$harga*$jumlah;
 if ($subtotal>=100000){
 	$diskon=0.15*$subtotal;
