@@ -1,1 +1,75 @@
+<?php
+// Definisikan harga tiket per kelas
+$harga_tiket = [
+    'ekonomi' => 200000,
+    'bisnis' => 350000,
+    'eksekutif' => 500000
+];
 
+// Fungsi untuk menghitung total biaya
+function hitungBiaya($kelas, $jumlah_penumpang) {
+    global $harga_tiket;
+    return $harga_tiket[$kelas] * $jumlah_penumpang;
+}
+
+// Inisialisasi variabel
+$kelas = '';
+$jumlah_penumpang = 0;
+$total_biaya = 0;
+$pesan = '';
+
+// Proses form jika sudah disubmit
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $kelas = $_POST['kelas'];
+    $jumlah_penumpang = intval($_POST['jumlah_penumpang']);
+    
+    if ($jumlah_penumpang > 0) {
+        $total_biaya = hitungBiaya($kelas, $jumlah_penumpang);
+        $pesan = "Total biaya perjalanan untuk $jumlah_penumpang orang dengan kelas $kelas adalah: Rp " . number_format($total_biaya, 0, ',', '.');
+    } else {
+        $pesan = "Jumlah penumpang harus lebih dari 0.";
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rencana Mudik Bandung-Yogyakarta</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 20px; }
+        h1 { color: #333; }
+        form { max-width: 400px; margin: 20px 0; }
+        label { display: block; margin-bottom: 5px; }
+        select, input[type="number"] { width: 100%; padding: 8px; margin-bottom: 10px; }
+        input[type="submit"] { background-color: #4CAF50; color: white; padding: 10px 15px; border: none; cursor: pointer; }
+        input[type="submit"]:hover { background-color: #45a049; }
+        .result { background-color: #f2f2f2; padding: 10px; border-radius: 5px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Rencana Mudik Bandung-Yogyakarta dengan Kereta Api</h1>
+    
+    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+        <label for="kelas">Pilih Kelas Kereta:</label>
+        <select name="kelas" id="kelas" required>
+            <option value="ekonomi">Ekonomi</option>
+            <option value="bisnis">Bisnis</option>
+            <option value="eksekutif">Eksekutif</option>
+        </select>
+        
+        <label for="jumlah_penumpang">Jumlah Penumpang:</label>
+        <input type="number" name="jumlah_penumpang" id="jumlah_penumpang" min="1" required>
+        
+        <input type="submit" value="Hitung Biaya">
+    </form>
+
+    <?php
+    if ($pesan) {
+        echo "<div class='result'>$pesan</div>";
+    }
+    ?>
+</body>
+</html>
