@@ -17,7 +17,7 @@
                 <option value="B02">B02 - Mouse</option>
                 <option value="C03">C03 - Harddisk</option>
                 <option value="D04">D04 - Mouse Pad</option>
-		<option value="E04">E04 - Kaos Kutang</option> 
+		<option value="E05">E05 - Kaos Kutang</option> 
                 </select>          </td>
         </tr>
         <tr>
